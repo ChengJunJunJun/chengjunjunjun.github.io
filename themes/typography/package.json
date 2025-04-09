@@ -1,0 +1,42 @@
+{
+  "name": "typography-theme",
+  "version": "1.0.0",
+  "description": "A clean and elegant theme focused on typography",
+  "private": true,
+  "scripts": {
+    "test": "echo 'No tests' && exit",
+    "build": "sass raw/scss:source/css --style=compressed --no-source-map && postcss source/css -u autoprefixer -r",
+    "scss-compile": "npm run build",
+    "watch": "sass raw/scss:source/css --watch --no-source-map"
+  },
+  "dependencies": {
+    "@paralleldrive/cuid2": "^2.2.2",
+    "bootstrap": "5.0.0",
+    "jquery": "^3.7.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "hexo": "^7.1.1",
+    "hexo-cli": "^4.3.1",
+    "hexo-renderer-pug": "^3.0.0",
+    "hexo-renderer-sass": "^0.5.0",
+    "hexo-server": "^3.0.0",
+    "postcss-cli": "^11.0.0",
+    "sass": "^1.83.1"
+  },
+  "overrides": {
+    "cuid": "@paralleldrive/cuid2@^2.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "keywords": [
+    "hexo",
+    "theme",
+    "typography",
+    "blog"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}

@@ -1,0 +1,8 @@
+@use 'sass:color';
+$backgroundColor: #2e405b;
+$foregroundColor: #ffffff;
+
+@forward './style.scss' with (
+  $backgroundColor: $backgroundColor,
+  $foregroundColor: $foregroundColor
+);
