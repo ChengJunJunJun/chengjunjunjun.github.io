@@ -1,12 +1,17 @@
 ---
 title: Git使用指南
 date: 2025-01-05
-last_modified: 2025-01-05
+last_modified: 2025-05-26
 author: Cheng Jun
 desc: git不只是git clone和git push，下面是我使用git上传到github的一些经验。
 tags: [Git, GitHub]
 categories: Technical sharing
 ---
+
+#### 
+1. 一般来说，当团队一起协作的时候，本地自己需要在main分支之外创建一个新的分支进行项目的开发，当自己的某个功能写好了之后，需要讲这个功能推送到远程的main分支，这个时候本地的mian分支一般是落后于远程的main分支的，因为其他人可能早就推送了他们自己的分支到main.
+2. 将本地的一些功能开发分支也可以推送到远程的不同分支，这样有助于共享进度，协助开发，有助于数据安全。
+3. 自己在2025年5月24日对自己的git配置文件有一次更行。主要参考[这篇blog](https://blog.gitbutler.com/how-git-core-devs-configure-git/)
 
 #### 当你需要和别人的代码协作的时候
 
