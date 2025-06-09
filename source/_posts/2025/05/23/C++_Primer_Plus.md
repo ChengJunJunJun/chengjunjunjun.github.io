@@ -1,7 +1,7 @@
 ---
 title: 《C++ Primer Plus》学习笔记
 date: 2025-05-23
-last_modified: 2025-05-26
+last_modified: 2025-05-27
 author: Cheng Jun
 desc: 
 tags: [C++, 进阶]
@@ -12,6 +12,8 @@ categories: Technical sharing
 2. **`string`** - size( );
 3. **`ctime`** - clock()
 4. **`climits`** 包括很多符号常量 -- `INT_MAX`;`INT_MIN`;
+5. **`cstdlib`** exit()
+6. **`cctype`** 它可以简化诸如确定字符是否为大写字母、数字、标点符号等工作
 
 ### 清单
 
@@ -25,15 +27,18 @@ if (test-condition)
 else
     statement2
 // ？：运算符
-expression1 ? expression2 : expression3
+expression1 ? expression2 : expression3 // 如果1为true，则为2，否则为3!
 // switch 通用格式
 switch (integer-expression){
-    case label1 : statement(s)
+    case label1 : statement(s);
                   break
-    case label2 : statement(s)
+    case label2 : statement(s);
     ...
-    default     : statement(s)
+    default     : statement(s); 
 }
+// 数组处理函数 常用编写方式
+void f_modify(double ar[], int n);
+void f_no_change(const double ar[], int n);
 ```
 
 ### 程序应该避免的问题
@@ -76,3 +81,25 @@ p[i]->generator   // ✗ 错误，p[i] 是对象不是指针
 2. `: , || &&` 是顺序点。
 3. `switch` 和 `while` 语句都会将枚举量提升为`int`类型。
 4. `break`适用于`switch`和任何循环语句,`continue`语句用于循环中,让程序跳过循环体中余下的代码,并开始新一轮的循环。(还有`goto`语句,但是不常用,最好是不用。)
+5. **字符是不需要转换**的，因为字符直接用字符编码，但是整数，浮点数这些类型的数据，对于输入的字符，需要将输入的字符转换成为**值的二进制编码**。
+6. 补充：cin >> ch, cin.get(), cin.getline()的一些区别，主要是关于怎么处理换行符的。
+- 回车键本身不是换行符，但按下回车键后会产生换行符。不同的操作系统按下回车键产生的不一样，但是在C++输入流会统一处理成为`\n`换行符。
+- 对于 >> 操作符，**跳过前导空白字符**：包括空格、制表符、换行符等；**读取数据直到遇到空白字符**：遇到空格、制表符、换行符时停止读取；**换行符留在输入缓冲区中**：不会被消费掉。
+- 行输入函数（getline），**读取整行内容**：直到遇到换行符；**消费换行符**：读取并丢弃换行符，但不包含在结果字符串中。
+- 字符输入函数get(), **get() 函数会读取包括换行符在内的任何字符**。
+7. C++中cin输入流的状态机制。cin对象内部维护着几个状态标志位,输入后会进行状态判断，返回Ture,False和其他的错误。下面是完整的错误处理模版:
+```C++
+#include <limits>  // 需要这个头文件
+
+double temp;
+cin >> temp;
+
+if (!cin) {
+    cin.clear();  // 1. 清除错误标志位
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');  // 2. 清空缓冲区
+    cout << "输入错误，已清理\n";
+}
+```
+
+#### 函数--C++的编程模块
+1. 
