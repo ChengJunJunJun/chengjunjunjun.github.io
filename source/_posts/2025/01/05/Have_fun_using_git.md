@@ -13,6 +13,10 @@ categories: Technical sharing
 2. 将本地的一些功能开发分支也可以推送到远程的不同分支，这样有助于共享进度，协助开发，有助于数据安全。
 3. 自己在2025年5月24日对自己的git配置文件有一次更行。主要参考[这篇blog](https://blog.gitbutler.com/how-git-core-devs-configure-git/)
 
+#### 什么是好的 git commit
+1. 在重构就不要修bug，在修bug就不要添加新功能。 
+2. 好的commit message 会包含**类型**，**作用域**，**主题**，**正文**。 
+
 #### 当你需要和别人的代码协作的时候
 
 **Fork 仓库**：首先，你需要将原始仓库 fork 到你自己的 GitHub 账户。这将创建一个你拥有的副本。
