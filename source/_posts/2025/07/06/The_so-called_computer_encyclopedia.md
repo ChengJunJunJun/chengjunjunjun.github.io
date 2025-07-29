@@ -1,5 +1,11 @@
-# 所谓的计算机百科全书【主要是自己查字典】
-
+---
+title: 所谓的计算机百科全书【主要是自己查字典】
+date: 2025-07-06
+last_modified: 2025-07-11
+author: Cheng Jun
+desc: 很多命令比较难记，需要不断的积累，这个教程主要是方便直接查询
+tags: [进阶]
+categories: [Technical sharing]
 ---
 
 ## 常见的类Unix命令
@@ -318,4 +324,30 @@ chown -R jyn:jyn /home/data3/jyn
 
 ```bash
 chmod -R 755 /home/data3/jyn
+```
+
+### 用rar解压文件
+由于Mac系统没有自带rar解压软件，所以需要使用第三方软件。
+
+要解压HUST-Master-Thesis.rar文件并保留完整路径结构，您可以使用`x`命令（Extract files with full path）：
+
+```bash
+rar x HUST-Master-Thesis.rar
+```
+
+这个命令会将RAR文件中的所有内容解压到当前目录下，并且保留文件的原始路径结构。
+
+如果您想将文件解压到特定的文件夹中（例如创建一个同名的文件夹），您可以使用`-op`选项（Set the output path for extracted files）：
+
+```bash
+rar x HUST-Master-Thesis.rar -op"HUST-Master-Thesis"
+```
+
+这个命令会将RAR文件解压到名为"HUST-Master-Thesis"的文件夹中。
+
+还有一种方法是先创建目标文件夹，然后在解压时指定路径：
+
+```bash
+mkdir HUST-Master-Thesis
+rar x HUST-Master-Thesis.rar HUST-Master-Thesis/
 ```
