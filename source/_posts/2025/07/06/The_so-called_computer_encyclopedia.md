@@ -10,6 +10,141 @@ categories: [Technical sharing]
 
 ## 常见的类Unix命令
 
+
+### 常见服务器维护命令
+
+1. 查看系统所有用户和查看系统所有组
+
+```bash
+cat /etc/passwd
+cat /etc/group
+```
+
+2. getent 用来 Get entries from administrative database.
+3. 查看用户详细信息
+
+```bash
+id username
+```
+
+4. 在具有sudo权限的用户下运行这个脚本用来查看每一个用户的具体信息
+
+```bash
+printf "%-12s %-35s %-5s %-6s\n" "用户" "组" "UID" "权限"
+printf "%-12s %-35s %-5s %-6s\n" "----" "----" "---" "----"
+for user in $(awk -F: '$3 >= 1000 && $1 != "nobody" {print $1}' /etc/passwd); do
+    uid=$(id -u $user)
+    groups=$(id -Gn $user | tr ' ' ',')
+    
+    # 最简单的判断：只要sudo -l有实际输出就认为有权限
+    sudo_output=$(sudo -l -U $user 2>/dev/null)
+    if [ -n "$sudo_output" ] && [ "$sudo_output" != "User $user is not allowed to run sudo on $(hostname)." ]; then
+        # 进一步检查输出内容
+        if echo "$sudo_output" | grep -qE "(ALL|NOPASSWD|may run)"; then
+            sudo_perm="有"
+        else
+            sudo_perm="无"
+        fi
+    else
+        sudo_perm="无"
+    fi
+    
+    printf "%-12s %-35s %-5s %-6s\n" "$user" "$groups" "$uid" "$sudo_perm"
+done
+```
+
+5. 修改密码
+
+```bash
+# 修改当前用户密码
+passwd
+# 修改其他用户密码
+sudo passwd username
+```
+
+6. 检查ssh服务和ssh服务状态
+
+```bash
+# 查看 SSH 服务状态
+sudo systemctl status ssh
+# 或者
+sudo systemctl status sshd
+
+# 查看 SSH 进程
+ps aux | grep ssh
+# 或者
+pgrep -l ssh
+
+# 查看端口 22 是否被监听
+sudo netstat -tlnp | grep :22
+# 或者使用 ss 命令
+sudo ss -tlnp | grep :22
+# 或者
+sudo lsof -i :22
+
+#重新加载 systemd 配置：
+sudo systemctl daemon-reload
+# 启动 SSH 服务
+sudo systemctl start ssh
+# 停止 SSH 服务
+sudo systemctl stop ssh
+# 重启 SSH 服务
+sudo systemctl restart ssh
+# 设置开机自启
+sudo systemctl enable ssh
+```
+
+7. 常见apt命令
+
+```bash
+apt update
+apt list --upgradable
+apt upgrade -y
+apt autoremove -y
+apt autoclean
+```
+
+8. 添加用户
+
+```bash
+sudo adduser username
+# 在某一个组把用户删除
+sudo gpasswd -d _username _groupename
+sudo deluser _username _groupename
+# 删除主组
+sudo groupdel _groupename
+# 删除用户及其主目录
+sudo userdel -r _username
+```
+
+9. 文件或者文件夹操作
+
+```bash
+# 移动文件或者文件夹
+mv [选项] 源文件/文件夹 目标路径
+      -i ：覆盖文件前提示确认（interactive）。
+      -f ：强制覆盖，不提示（force）。
+      -n ：不覆盖已有文件。
+      -v ：显示过程（verbose）。
+
+# 创建文件
+touch file.txt
+
+# 创建文件夹
+mkdir mydir
+mkdir -p parent/child/grandchild # 递归创建多级目录
+
+# 删除文件
+rm file.txt
+rm file1.txt file2.txt # 删除多个文件
+
+#删除文件夹
+rmdir mydir # 删除空文件夹
+rm -r mydir # 删除非空文件夹
+      -r ：递归删除目录及其内容
+      -f ：强制覆盖，不提示（force）。
+```
+
 ### mkdir
 
 `-p` 参数的主要功能：
