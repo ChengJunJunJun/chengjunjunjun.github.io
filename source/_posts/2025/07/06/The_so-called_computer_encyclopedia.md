@@ -486,3 +486,21 @@ rar x HUST-Master-Thesis.rar -op"HUST-Master-Thesis"
 mkdir HUST-Master-Thesis
 rar x HUST-Master-Thesis.rar HUST-Master-Thesis/
 ```
+
+### 关闭图形显示界面
+```bash
+systemctl statuas gdm
+systemctl stop gdm
+systemctl start gdm
+```
+
+```bash
+sudo systemctl set-default graphical.target   # 开机进入图形界面
+sudo systemctl set-default multi-user.target  # 开机进入命令行
+```
+
+立即切换而不用重启，可以：
+```bash
+sudo systemctl isolate graphical.target  # 切到图形界面
+sudo systemctl isolate multi-user.target # 切到命令行界面
+```
