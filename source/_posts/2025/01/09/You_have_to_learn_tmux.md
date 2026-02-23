@@ -11,6 +11,11 @@ categories: Technical sharing
 
 > 提示：`Ctrl + b` 是 tmux 的默认前缀键，需要先按 `Ctrl + b`，松开后再按其他键。可以修改为其他键，比如 `Ctrl + a`。修改tmux 的配置文件 `~/.tmux.conf` 文件，添加 `set -g prefix C-a` 即可。
 
+#### Tmux 窗口管理的常见概念
+1. Session
+2. Window
+3. pane
+
 #### 基本命令
 ```bash
 tmux new -s <session-name> # 创建一个新的会话
