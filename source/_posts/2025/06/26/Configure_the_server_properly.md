@@ -46,3 +46,8 @@ unset __conda_setup
 
 ### wandb 的使用
 1. wandb是用于记录和可视化训练过程的工具，但是国内不能访问wandb，需要使用代理。
+
+### 自用创建用户脚本
+```bash
+sudo bash create_user.sh "ssh-ed25519 ..." fkq
+```
